@@ -1,45 +1,32 @@
 # Foundry Exercises: Models & Prompts
 
-Welcome! This assignment has **two parts** that build on each other:
+This assignment has two parts that build on each other.
 
-### Part 1 — Explore the model catalog 🗂️
+### Part 1 — Explore the model catalog
 
-You'll browse the **Azure AI Foundry model catalog** — the "app store" of AI
-models — and answer a short quiz. The questions can only be answered by
-actually exploring the catalog, so keep it open in another browser tab.
+You browse the **Microsoft Foundry model catalog**, the place where models are discovered, compared and deployed, and answer a short quiz. The questions can only be answered by exploring the catalog, so keep it open in another browser tab.
 
-### Part 2 — The Prompt Lab ✍️
+### Part 2 — Write the prompts
 
-Choosing a model is half the job; **talking to it well is the other half.**
-You'll use a web app (running right here in Codio) to write **system prompts**
-and **user prompts** for three challenges. Each attempt is run against your own
-Azure OpenAI deployment and **graded from 0–100 with feedback** telling you
-exactly how to refine your prompt. Score **70+** on each challenge to pass it.
+Choosing a model is half the job; talking to it well is the other half. You write **system prompts** and **user prompts** for three challenges, each in a small Python file that opens beside the guide. A Check button sends your prompt to your own deployment, has the result graded 0 to 100 against a rubric, and tells you exactly what to refine. Score 70 or more on each challenge to pass it.
 
-### What you'll need
+### What you need
 
-- A browser tab with the **Azure AI Foundry portal**: [https://ai.azure.com](https://ai.azure.com)
-  (sign in with the account you use for Azure).
-- For Part 2: your **Azure OpenAI endpoint, key, and deployment name** — the
-  same values you used in the chat lab. If you don't have them, ask your
-  instructor.
+- A browser tab with the Foundry portal, [https://ai.azure.com](https://ai.azure.com), signed in with your course account.
+- A deployment named `memphis-copilot` in your Foundry project, and its endpoint and key. The next page checks for the deployment and puts the two values in your `.env` file.
 
 ### How grades work
 
 | Item | Points |
 | --- | --- |
-| Part 1 quiz (7 questions) | 8 |
-| Challenge 1 — system prompt | 10 |
-| Challenge 2 — user prompt | 10 |
-| Challenge 3 — structured output | 10 |
+| Set up your endpoint (one check) | 20 |
+| Part 1 quiz (7 questions) | 140 |
+| Challenge 1 — system prompt | 20 |
+| Challenge 2 — user prompt | 20 |
+| Challenge 3 — structured output | 20 |
 
-Your grade is recorded when you **mark the assignment complete** at the end
-(you can re-open, improve, and complete it again to update it). The Part 1
-quiz allows **one attempt per question**, so explore the catalog
-and be confident before you answer. Part 2 is the opposite: run and refine
-your prompts as many times as you like — only your **best** score is kept.
+The quiz allows one attempt per question, so be sure of each answer in the catalog before you check it. The challenges are the opposite: press Check as often as you like. Each press scores the prompt 0 to 100, that score is the share of the challenge's points you earn, and only your best score is kept.
 
-Use the **Next** arrow at the bottom of this panel to begin — first a quick
-one-time setup of your endpoint, then Part 1.
+Use the **Next** arrow at the bottom of this panel to begin: first the endpoint, then Part 1.
 
 *Guide version 2026-09-23.*

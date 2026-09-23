@@ -1,0 +1,31 @@
+{
+  "type": "test",
+  "taskId": "test-402911736",
+  "source": {
+    "name": "Check the endpoint and key",
+    "showName": true,
+    "instructions": "Sends one short question to your memphis-copilot deployment using the endpoint and key in your .env. It passes when the deployment answers. Unlimited attempts; your best score counts.",
+    "command": "python3 .guides/secure/run.py check-env",
+    "timeoutSeconds": 300,
+    "metadata": {
+      "tags": [
+        {
+          "name": "Assessment Type",
+          "value": "Advanced Code Test"
+        }
+      ],
+      "files": [],
+      "opened": []
+    },
+    "bloomsObjectiveLevel": "",
+    "learningObjectives": "",
+    "guidance": "",
+    "showGuidanceAfterResponseOption": {
+      "type": "Never"
+    },
+    "maxAttemptsCount": 0,
+    "points": 20,
+    "arePartialPointsAllowed": false,
+    "useMaximumScore": true
+  }
+}

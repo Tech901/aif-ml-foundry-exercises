@@ -7,7 +7,7 @@
 			"action": "close"
 		},
 		{
-			"path": "#preview: https://{{domain5000}}/challenge/2",
+			"path": "challenge2.py",
 			"panel": 0,
 			"action": "open"
 		}

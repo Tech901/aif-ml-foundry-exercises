@@ -1,26 +1,46 @@
 # Challenge 2 — Sharpen the ask
 
-**Skill: writing a user prompt.** Most disappointing AI answers come from prompts like the one you're about to fix:
+**Skill: writing a user prompt.** Most disappointing AI answers come from prompts like the one you are about to fix:
 
-> *"write something about recycling"*
+> *write something about recycling*
 
-The model can't read minds — it fills every gap with a guess. A strong user prompt closes those gaps. A reliable recipe:
+The model cannot read minds, so it fills every gap with a guess. A strong user prompt closes the gaps. A reliable recipe:
 
-| Ingredient | Answers the question… | Example |
+| Ingredient | Answers the question | Example |
 | --- | --- | --- |
-| **Context** | Who's asking, and why? | "I'm writing for our neighborhood association…" |
-| **Task** | What exactly do you want? | "…draft a one-page flyer…" |
-| **Format** | What should it look like? | "…a headline, 3 bullet do's & don'ts, under 150 words…" |
-| **Quality cues** | Tone? Include/avoid? | "…friendly, no guilt-tripping, end with a call to action." |
+| **Context** | Who is asking, and why? | "I'm writing for our neighborhood association ..." |
+| **Task** | What exactly do you want? | "... draft a one-page flyer ..." |
+| **Format** | What should it look like? | "... a headline, 3 bullet do's and don'ts, under 150 words ..." |
+| **Quality cues** | Tone? Include or avoid? | "... friendly, no guilt-tripping, end with a call to action." |
+
+### The scenario
+
+A neighborhood association wants a piece of writing that encourages residents to recycle correctly. Someone on the team typed the vague request above into the model and got a generic wall of text. Your job is to write the user prompt they should have written.
 
 ### Your job
 
-The panel beside this page shows **Challenge 2**. The system prompt is fixed (a plain "helpful writing assistant") — everything must come from **your user prompt**. Rewrite the vague request into one that would get a usable result on the first try.
+`challenge2.py` is open beside this page. Replace the placeholder line inside `USER_PROMPT`. The system prompt is fixed and plain, "You are a helpful writing assistant.", so everything has to come from your user prompt:
 
-> 💡 Compare the model's reply to what "write something about recycling" would get you — a specific prompt should produce something the association could actually print.
+- **Context.** Who is asking and why: the association and its goal.
+- **One task.** The kind of writing you want, such as a flyer, an email or a social post.
+- **Constraints.** Audience, length and format: headings, bullets, word limits.
+- **Quality cues.** The tone to use, and at least one thing the writing must include, such as three do's and don'ts or a call to action, or must avoid.
 
-> ⚠️ **Don't paste the checklist.** The requirements in the brief describe what a good prompt *contains* — they aren't the prompt. Copying them (or writing meta-instructions like "provide context and specify a format") scores zero. Invent the actual specifics yourself: who the flyer is for, what it must say, how long it can be.
+> **Do not paste the checklist.** Those bullets describe what a good prompt *contains*; they are not the prompt. A prompt that says "provide context and specify a format" scores zero. Invent the actual specifics yourself: who the flyer is for, what it must say, how long it can be.
 
-### Pass it
+### The rubric
 
-Press **▶ Run & grade my prompts** and refine with the feedback. When the scorecard shows **PASSED (70+)**, you're done — your best score is saved automatically.
+| Criterion | Points | What earns them |
+| --- | --- | --- |
+| Context and purpose | 25 | The prompt explains who it is for and what it is trying to achieve. |
+| One clear task | 25 | The prompt asks for one specific, unambiguous deliverable. |
+| Format and length | 25 | The prompt constrains audience, structure and length, and the reply respects them. |
+| Quality cues | 25 | The prompt sets tone and names concrete content to include or avoid. |
+
+### Have it checked
+
+Save the file, then press the button. Compare the reply with what "write something about recycling" would get: a specific prompt produces something the association could print. 70 passes; your best score is kept.
+
+{Check challenge 2|assessment}(test-561208473)
+
+> **Checkpoint:** The first line of the result reads `PASSED`. The reply is the piece of writing you asked for, in the format and length you set, not an essay about recycling in general.

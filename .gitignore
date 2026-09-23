@@ -2,14 +2,6 @@
 # Instructors: never commit it with real values.
 .env
 
-# Runtime files created by lab.sh / the Flask app.
-.flask.pid
-.flask.log
-.pip.lock
-
-# Per-student grading results written by the Prompt Lab.
-results/
-
 # Python
 __pycache__/
 *.pyc

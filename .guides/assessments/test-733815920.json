@@ -1,0 +1,31 @@
+{
+  "type": "test",
+  "taskId": "test-733815920",
+  "source": {
+    "name": "Check challenge 1",
+    "showName": true,
+    "instructions": "Runs SYSTEM_PROMPT from challenge1.py against two customer messages and grades the prompt 0-100 against the rubric. 70 passes. Unlimited attempts; your best score is kept.",
+    "command": "python3 .guides/secure/run.py check-challenge-1",
+    "timeoutSeconds": 300,
+    "metadata": {
+      "tags": [
+        {
+          "name": "Assessment Type",
+          "value": "Advanced Code Test"
+        }
+      ],
+      "files": [],
+      "opened": []
+    },
+    "bloomsObjectiveLevel": "",
+    "learningObjectives": "",
+    "guidance": "",
+    "showGuidanceAfterResponseOption": {
+      "type": "Never"
+    },
+    "maxAttemptsCount": 0,
+    "points": 20,
+    "arePartialPointsAllowed": true,
+    "useMaximumScore": true
+  }
+}

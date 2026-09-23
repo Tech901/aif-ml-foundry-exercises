@@ -1,0 +1,31 @@
+{
+  "type": "test",
+  "taskId": "test-894037215",
+  "source": {
+    "name": "Check challenge 3",
+    "showName": true,
+    "instructions": "Runs SYSTEM_PROMPT and USER_PROMPT from challenge3.py against three customer messages, checks every reply's JSON, and grades the prompts 0-100 against the rubric. 70 passes. Unlimited attempts; your best score is kept.",
+    "command": "python3 .guides/secure/run.py check-challenge-3",
+    "timeoutSeconds": 300,
+    "metadata": {
+      "tags": [
+        {
+          "name": "Assessment Type",
+          "value": "Advanced Code Test"
+        }
+      ],
+      "files": [],
+      "opened": []
+    },
+    "bloomsObjectiveLevel": "",
+    "learningObjectives": "",
+    "guidance": "",
+    "showGuidanceAfterResponseOption": {
+      "type": "Never"
+    },
+    "maxAttemptsCount": 0,
+    "points": 20,
+    "arePartialPointsAllowed": true,
+    "useMaximumScore": true
+  }
+}

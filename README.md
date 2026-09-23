@@ -1,94 +1,75 @@
-# Foundry Exercises — Model Catalog + Prompt Lab
+# Foundry Exercises — Models & Prompts
 
-A two-part **Codio assignment** for AI fundamentals classes, built on the
-[flask-codio-test](https://github.com/treyt901/flask-codio-test) chat lab:
+A two-part Codio assignment for the AI fundamentals course.
 
-1. **Part 1 — Explore the model catalog.** Students browse the Azure AI
-   Foundry model catalog ([ai.azure.com](https://ai.azure.com)) and answer a
-   Codio multiple-choice quiz whose answers can only be found by actually
-   exploring the catalog (publishers, inference tasks, model cards,
-   deployment options).
-2. **Part 2 — The Prompt Lab.** A Flask web app where students write **system
-   and user prompts** for three challenges, run them against their own Azure
-   OpenAI deployment, and get them **auto-graded 0–100 with concrete
-   refinement feedback**. Codio assessments record a pass once a challenge
-   scores 70+.
-
----
+1. **Part 1 — Explore the model catalog.** Students browse the Microsoft Foundry
+   model catalog and answer a seven-question multiple-choice quiz whose answers
+   are only in the catalog (publishers, inference tasks, model cards, deployment
+   options).
+2. **Part 2 — Write the prompts.** Students write a system prompt, a user prompt,
+   and a JSON-extraction system prompt in three small Python files, and a Check
+   button on each page runs the prompt against their own `memphis-copilot`
+   deployment and grades it 0–100 against a rubric with concrete refinements.
 
 ## The three challenges
 
-| # | Students write | Skill | Graded on |
+| # | File | Students write | Graded on |
 | --- | --- | --- | --- |
-| 1 | System prompt | Role, scope & guardrails (an off-topic test message probes them) | role/persona, scope, tone, output rules |
-| 2 | User prompt | Turning a vague ask into a specific one | context, task clarity, format/length, quality cues |
-| 3 | Both | Structured (JSON-only) output for app integration | job definition, schema, robustness, actual compliance (auto format check) |
+| 1 | `challenge1.py` | `SYSTEM_PROMPT` | role/persona, scope and guardrails (an off-topic test message probes them), tone, output rules |
+| 2 | `challenge2.py` | `USER_PROMPT` | context, one clear task, format and length, quality cues |
+| 3 | `challenge3.py` | `SYSTEM_PROMPT` (user prompt is a fixed trigger) | job definition, schema, robustness rules, and an automatic JSON format check over three messages |
 
 ## How grading works
 
-Each **Run & grade** in the Prompt Lab:
+Every button on the guide is a standard Codio Advanced Code Test running
+`python3 .guides/secure/run.py <check-id>`. `run.py` loads the student's own
+endpoint and key from `.env`, scrubs the key from all output, and dispatches to
+`check_graded.py`:
 
-1. Executes the student's prompt(s) against their deployment. The side the
-   student doesn't write comes from `challenges.json` (fixed test messages for
-   challenge 1, a fixed system prompt for challenge 2).
-2. Makes a second **grader call** to the same deployment: the student's
-   prompts + the resulting transcripts + the rubric go in; per-criterion
-   scores, strengths, and improvement suggestions come out. The server clamps
-   scores and computes the total itself.
-3. Saves the **best** result to `results/challenge_<id>.json` (gitignored).
+- `check-env` sends one question to `memphis-copilot` and passes when it answers.
+- `check-challenge-N` reads the prompt constants out of the student's file in a
+  subprocess, runs them against the challenge's test messages, applies the
+  JSON format check for challenge 3, then asks the same deployment to score the
+  prompts against the rubric. The harness clamps each criterion to its maximum
+  and totals it itself. The total is reported as the percent, so partial points
+  are earned below the pass mark and Codio keeps the best score.
+- A prompt left at its placeholder, or one pasted from the brief (measured by
+  five-word overlap with the challenge text), scores zero without a model call.
 
-Grades are recorded by an **assignment-level auto-grade script**
-(`.guides/secure/autograde.py`) that Codio runs when the student clicks
-**Mark as complete**: it reads the Part 1 quiz points from Codio's
-`CODIO_AUTOGRADE_ENV`, awards 10 points per challenge whose saved best score
-meets `pass_score` (70, set in `challenges.json`), and posts the combined
-percentage plus a markdown grade report to `CODIO_AUTOGRADE_V2_URL`.
+Nothing is read from files the student can write, so grades cannot be forged by
+editing a results file. Scores still come from a model judge, so they vary a
+little between presses; the best is kept.
 
-**One-time setup in the course:** in the assignment's settings, under
-grading/completion, enable running a custom script on assignment completion
-and set it to `python3 .guides/secure/autograde.py`. Without this, marking
-complete records no grade.
-
-> Note: grading uses an LLM as the judge, so scores vary slightly between
-> runs (the best score is kept). The auto-grade script trusts the results
-> files on the student's box — fine for a formative fundamentals lab, but not
-> tamper-proof against a determined student with a terminal.
+Challenge definitions (scenario, requirements, rubric, test messages, pass
+score) live in `challenges.json`. The guide pages repeat them for students, so
+edit both together.
 
 ## Project layout
 
 ```
-.codio                     Run-menu buttons + preview tab (port 5000)
+.codio                     Run menu: run the current file, test the connection
 .guides/
-  assessments/             7 multiple-choice questions (Part 1), one file per task
+  assessments/             7 multiple-choice quiz items + 4 Advanced Code Tests
   content/                 Guide pages (Codio book format)
-  secure/autograde.py      Auto-grade script run on "Mark as complete"
-app.py                     Flask app: one page per challenge (/challenge/<id>), run + grade + save endpoints
-challenges.json            Challenge briefs, fixed prompts/messages, rubrics, pass score
-lab.sh / run.sh            Start/restart/stop the app (background, logs to .flask.log)
-templates/, static/        The Prompt Lab UI
-.env                       Per-student Azure OpenAI credentials (ships blank; students fill it in)
-test_connection.py         Endpoint check run by the setup page's "Test my connection" button
+  img/                     Illustrations for the .env page
+  secure/run.py            Grader harness (credentials, scrubbing, dispatch)
+  secure/check_graded.py   The four checks
+challenge1.py, challenge2.py, challenge3.py   What students edit
+prompt_tools.py            Written for you: runs a challenge's prompts from a terminal
+challenges.json            Briefs, rubrics, test messages, pass score
+test_connection.py         Terminal connection check (the guide's check button does the same)
+.env                       Per-student endpoint and key (ships blank; students fill it in)
 ```
 
 ## For instructors
 
-- **Environment:** same requirements as the chat lab — Python 3.8+ with
-  `requirements.txt` baked into a Codio Stack. Follow
-  [INSTRUCTOR_SETUP.md](INSTRUCTOR_SETUP.md) once so students never run `pip`.
-- **Students need** an Azure OpenAI resource with a chat deployment
-  (`gpt-4o-mini` works well and cheap) and its endpoint/key/deployment name.
-- **Tuning:** everything about the challenges — scenarios, requirements,
-  rubrics, test messages, the pass score — lives in `challenges.json`. Edit it
-  without touching code. Quiz questions live in `.guides/assessments.json`.
-- **Model catalog drift:** the Part 1 questions were written against durable
-  catalog facts (publishers, task types, deployment options), but the catalog
-  evolves — give the quiz a quick sanity pass each term.
-
-## Running locally (outside Codio)
-
-```bash
-pip install -r requirements.txt
-# edit .env with your Azure OpenAI details, then optionally:
-python3 test_connection.py
-python3 app.py            # http://localhost:5000
-```
+- **Environment.** The course stack already ships `openai` and `python-dotenv`;
+  `requirements.txt` records them for a box that predates it.
+- **Students need** a deployment named `memphis-copilot` (model `gpt-4.1-mini`)
+  in their Foundry project. The Set up your endpoint page tells them how to
+  deploy one if it is missing, and records a check when it answers.
+- **Grader changes** only reach students through a Codio publish. Bump the
+  guide version line on the Overview page with every grader change so the
+  assignment has a visible change to publish.
+- **Catalog drift.** The Part 1 questions were written against durable facts,
+  but the catalog evolves; give the quiz a quick pass each term.

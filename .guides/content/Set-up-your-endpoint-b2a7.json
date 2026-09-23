@@ -7,11 +7,6 @@
 			"action": "close"
 		},
 		{
-			"path": "#terminal: bash lab.sh prepare",
-			"panel": 0,
-			"action": "open"
-		},
-		{
 			"path": ".env",
 			"panel": 0,
 			"action": "open"

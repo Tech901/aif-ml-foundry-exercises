@@ -1,15 +1,10 @@
 {
 	"id": "c6f13e5a-7d9b-4c2e-9a4f-6b8d0c1e2f35",
-	"title": "Part 2 Start the Prompt Lab",
+	"title": "Part 2 How the challenges work",
 	"files": [
 		{
 			"path": "#tabs",
 			"action": "close"
-		},
-		{
-			"path": "#terminal: bash lab.sh start",
-			"panel": 0,
-			"action": "open"
 		}
 	],
 	"path": [],
@@ -18,5 +13,5 @@
 	"teacherOnly": false,
 	"closeTerminalSession": true,
 	"learningObjectives": "",
-	"layout": "2-panels"
+	"layout": "1-panel"
 }
