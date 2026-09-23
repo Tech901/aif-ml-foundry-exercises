@@ -41,3 +41,5 @@ your prompts as many times as you like — only your **best** score is kept.
 
 Use the **Next** arrow at the bottom of this panel to begin — first a quick
 one-time setup of your endpoint, then Part 1.
+
+*Guide version 2026-09-23.*
