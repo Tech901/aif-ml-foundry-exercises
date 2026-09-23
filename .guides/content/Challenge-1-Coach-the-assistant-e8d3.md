@@ -8,7 +8,7 @@ Bluff City Bikes is a small bicycle shop in Memphis. It sells and repairs bikes,
 
 ### Your job
 
-`challenge1.py` is open beside this page. Replace the placeholder line inside `SYSTEM_PROMPT` with a system prompt that turns the model into the shop's support assistant. A good one covers:
+The Prompt Lab beside this page shows Challenge 1. In its **System prompt** editor, write a system prompt that turns the model into the shop's support assistant. A good one covers:
 
 - **Role.** "You are ..." Who is the assistant? Give it a name and a job that fit the shop.
 - **Scope.** What it helps with, and what to do when asked anything else: decline politely and steer back to the shop.
@@ -35,7 +35,10 @@ Vague scope instructions such as "be helpful about bikes" tend to fail the secon
 
 ### Have it checked
 
-Save the file, then press the button. Read the two replies and the improvements, edit, and press again. 70 passes; your best score is kept.
+Press **Run my prompts** in the Prompt Lab and read the two replies against the requirements. Edit and run until they hold up, then press the button below, which grades the prompt the page saved and lists the improvements to make. 70 passes; your best score is kept.
+
+If the Prompt Lab tab beside this page is blank or shows a connection error, press this once: [Start or reopen the Prompt Lab](cmd bash lab.sh start; open_preview https://{{domain5000}}/challenge/1 panel=1)
+
 
 {Check challenge 1|assessment}(test-733815920)
 

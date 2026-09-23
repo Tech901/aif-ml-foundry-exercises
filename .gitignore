@@ -2,6 +2,13 @@
 # Instructors: never commit it with real values.
 .env
 
+# Runtime files created by lab.sh / the Prompt Lab.
+.testbed.pid
+.testbed.log
+
+# Per-student prompts the Prompt Lab saves for the Check buttons to grade.
+prompts/
+
 # Python
 __pycache__/
 *.pyc

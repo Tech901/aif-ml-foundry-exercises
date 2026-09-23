@@ -1,6 +1,6 @@
 # Set up your endpoint
 
-Part 2 sends every prompt to a deployment in **your** Foundry project, so before anything else the code needs two values from you: the **endpoint**, the HTTPS address requests go to, and the **key**, the secret string that proves a request is allowed to use it. Both go in the `.env` file open beside this page. The deployment's name, `memphis-copilot`, is already in the code.
+Part 2 sends every prompt to a deployment in **your** Foundry project, so before anything else the code needs two values from you: the **endpoint**, the HTTPS address requests go to, and the **key**, the secret string that proves a request is allowed to use it. Both go in the `.env` file open beside this page, where a small terminal is also installing the Prompt Lab's libraries while you work; leave it alone. The deployment's name, `memphis-copilot`, is already in the code.
 
 ### 1. Check the deployment
 
@@ -36,4 +36,4 @@ The check reads your `.env` and sends one short question to `memphis-copilot`. I
 
 > **Checkpoint:** The first line of the result reads `PASSED`. If it reads `NOT YET`, the line under it names the likely cause: a key copied short, an address that still carries `/api/projects/...` or lost its ending slash, or no deployment named `memphis-copilot` in your project. Do not move on until it passes; everything in Part 2 depends on it.
 
-> **Pro Tip:** The key is a secret and `.env` is the only place it goes. It never goes in a challenge file, never in a message, never in a screenshot. Anyone holding it can spend against your subscription. If you think you have shown it to somebody, tell your instructor; a key can be replaced in the portal, and the old one stops working.
+> **Pro Tip:** The key is a secret and `.env` is the only place it goes. It never goes in a prompt, never in a message, never in a screenshot. Anyone holding it can spend against your subscription. If you think you have shown it to somebody, tell your instructor; a key can be replaced in the portal, and the old one stops working.

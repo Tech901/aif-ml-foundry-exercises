@@ -13,6 +13,6 @@ You have covered the two halves of working with AI models on Azure.
 
 ### Your grade
 
-Every check you pressed recorded its score as you went, and each kept your best attempt. Look back over the three challenge pages: the aim is `PASSED` on each. Then select **Mark as complete** to submit the assignment. You can reopen it, improve a prompt, press its check again, and mark it complete again.
+Every check you pressed recorded its score as you went, and each kept your best attempt. The Prompt Lab can be left running; Codio stops it with the box. Look back over the three challenge pages: the aim is `PASSED` on each. Then select **Mark as complete** to submit the assignment. You can reopen it, improve a prompt, press its check again, and mark it complete again.
 
 Nice work. You can now both pick the right model and get the most out of it.

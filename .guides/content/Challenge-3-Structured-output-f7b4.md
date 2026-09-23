@@ -8,7 +8,7 @@ Bluff City Bikes gets support emails and wants to log them automatically. Your p
 
 ### Your job
 
-`challenge3.py` is open beside this page. `USER_PROMPT` is filled in for you; it is only the trigger, and you can leave it. Your work is `SYSTEM_PROMPT`. Replace its placeholder line with a prompt that:
+The Prompt Lab beside this page shows Challenge 3. Its **User prompt** editor is filled in for you; it is only the trigger, and you can leave it. Your work is the **System prompt** editor. Write a prompt that:
 
 - defines the job: a data-extraction assistant that outputs only a raw JSON object;
 - specifies the exact schema, the keys `customer_name`, `product`, `issue`, `sentiment`, `urgency`, and the values allowed: sentiment is `positive`, `neutral` or `negative`; urgency is `low`, `medium` or `high`;
@@ -45,7 +45,10 @@ Your prompts run against each of these. The second is missing details on purpose
 
 ### Have it checked
 
-Save the file, then press the button. Under the scores, an automatic format check reports one line per test message: whether the JSON parsed, whether every key was present, and whether any value was blank, the wrong type or outside the allowed list. 70 passes; your best score is kept.
+Press **Run my prompts** in the Prompt Lab. Each run card ends with an automatic format check, one line per test message: whether the JSON parsed, whether every key was present, and whether any value was blank, the wrong type or outside the allowed list. When all three lines are clean, press the button below to have the prompt graded. 70 passes; your best score is kept.
+
+If the Prompt Lab tab beside this page is blank or shows a connection error, press this once: [Start or reopen the Prompt Lab](cmd bash lab.sh start; open_preview https://{{domain5000}}/challenge/3 panel=1)
+
 
 {Check challenge 3|assessment}(test-894037215)
 

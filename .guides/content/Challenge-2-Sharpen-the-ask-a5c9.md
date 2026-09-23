@@ -19,7 +19,7 @@ A neighborhood association wants a piece of writing that encourages residents to
 
 ### Your job
 
-`challenge2.py` is open beside this page. Replace the placeholder line inside `USER_PROMPT`. The system prompt is fixed and plain, "You are a helpful writing assistant.", so everything has to come from your user prompt:
+The Prompt Lab beside this page shows Challenge 2. Write in its **User prompt** editor. The system prompt is fixed and plain, "You are a helpful writing assistant.", so everything has to come from your user prompt:
 
 - **Context.** Who is asking and why: the association and its goal.
 - **One task.** The kind of writing you want, such as a flyer, an email or a social post.
@@ -39,7 +39,10 @@ A neighborhood association wants a piece of writing that encourages residents to
 
 ### Have it checked
 
-Save the file, then press the button. Compare the reply with what "write something about recycling" would get: a specific prompt produces something the association could print. 70 passes; your best score is kept.
+Press **Run my prompts** in the Prompt Lab and compare the reply with what "write something about recycling" would get: a specific prompt produces something the association could print. When it does, press the button below to have the prompt graded. 70 passes; your best score is kept.
+
+If the Prompt Lab tab beside this page is blank or shows a connection error, press this once: [Start or reopen the Prompt Lab](cmd bash lab.sh start; open_preview https://{{domain5000}}/challenge/2 panel=1)
+
 
 {Check challenge 2|assessment}(test-561208473)
 

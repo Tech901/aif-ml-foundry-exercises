@@ -8,7 +8,7 @@ You browse the **Microsoft Foundry model catalog**, the place where models are d
 
 ### Part 2 — Write the prompts
 
-Choosing a model is half the job; talking to it well is the other half. You write **system prompts** and **user prompts** for three challenges, each in a small Python file that opens beside the guide. A Check button sends your prompt to your own deployment, has the result graded 0 to 100 against a rubric, and tells you exactly what to refine. Score 70 or more on each challenge to pass it.
+Choosing a model is half the job; talking to it well is the other half. You write **system prompts** and **user prompts** for three challenges in the **Prompt Lab**, a web page that runs beside the guide and sends each prompt to your own deployment so you can read what comes back. A Check button on each challenge page then grades the prompt 0 to 100 against a rubric and tells you exactly what to refine. Score 70 or more on each challenge to pass it. No code is written in this assignment.
 
 ### What you need
 

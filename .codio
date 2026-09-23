@@ -1,9 +1,23 @@
 {
   "commands": {
-    "Run": "python3 {{filepath}}",
+    "Prompt Lab": {
+      "Start": {
+        "cmd": "bash lab.sh start",
+        "preview": "Prompt Lab",
+        "reloadPreview": true
+      },
+      "Restart": {
+        "cmd": "bash lab.sh restart",
+        "preview": "Prompt Lab",
+        "reloadPreview": true
+      },
+      "Stop": {
+        "cmd": "bash lab.sh stop"
+      }
+    },
     "Test my endpoint connection": "python3 test_connection.py"
   },
   "preview": {
-    "Project Index (static)": "https://{{domain}}/{{index}}"
+    "Prompt Lab": "https://{{domain5000}}/"
   }
 }

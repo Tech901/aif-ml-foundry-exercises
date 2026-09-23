@@ -6,6 +6,7 @@ Every Check button on the guide is an Advanced Code Test whose command is
     python3 .guides/secure/run.py <check-id>
 
 The checks live in check_graded.py, which exposes CHECKS = {check_id: fn(creds)}.
+The prompts they grade are the ones the Prompt Lab test bed saved under prompts/.
 This file loads the student's own endpoint and key from the .env file in the
 workspace root, dispatches, and keeps the rules every lab in this course follows:
   * the key is never printed - every byte of student-visible output is scrubbed
@@ -15,8 +16,6 @@ workspace root, dispatches, and keeps the rules every lab in this course follows
 """
 from __future__ import annotations
 
-import os
-import subprocess
 import sys
 from pathlib import Path
 
@@ -24,7 +23,6 @@ HERE = Path(__file__).resolve()
 WORKSPACE = HERE.parents[2]            # <workspace>/.guides/secure/run.py
 STUDENT_ENV_FILE = WORKSPACE / ".env"
 
-STEP_TIMEOUT = 60   # seconds for reading a student's file; the assessment timeout is 300
 RULE = "-" * 40     # the student result panel is narrow
 
 
@@ -107,44 +105,28 @@ def classify(stderr: str) -> str | None:
     return None
 
 
-# The one-line program that reads the student's prompt constants. It runs in a
-# subprocess from the workspace root so `import challenge1` resolves to the student's
-# own file, and so a top-level error in that file cannot end the grader.
-READ_PROMPTS = ("import sys, json, importlib; m = importlib.import_module(sys.argv[1]); "
-                "print(json.dumps({'system': getattr(m, 'SYSTEM_PROMPT', None), "
-                "'user': getattr(m, 'USER_PROMPT', None)}))")
+PROMPTS_DIR = WORKSPACE / "prompts"
 
 
-def read_prompts(module: str, creds: dict[str, str]) -> tuple[dict | None, str]:
-    """Import <workspace>/<module>.py in a subprocess and return its prompt constants.
+def read_prompts(challenge_id: int) -> tuple[dict | None, str]:
+    """Return the prompts the Prompt Lab saved for one challenge, or (None, why not).
 
-    Returns (prompts, error). AI901_* is popped from the environment so nothing the
-    grader holds can reach the student's code.
+    The test bed writes prompts/challenge_<id>.json on every keystroke pause and on
+    every Run. The grader re-runs and re-scores those prompts itself; nothing the
+    student can write is trusted as a score.
     """
-    path = WORKSPACE / f"{module}.py"
-    if not path.is_file():
-        return None, f"{module}.py is missing from your workspace"
-    env = os.environ.copy()
-    env.pop("AI901_ENDPOINT", None)
-    env.pop("AI901_KEY", None)
-    env.update({"PYTHONUNBUFFERED": "1", "PYTHONDONTWRITEBYTECODE": "1"})
-    try:
-        r = subprocess.run([sys.executable, "-c", READ_PROMPTS, module], cwd=str(WORKSPACE),
-                           env=env, capture_output=True, text=True, encoding="utf-8",
-                           errors="replace", timeout=STEP_TIMEOUT)
-    except subprocess.TimeoutExpired:
-        return None, f"{module}.py did not finish loading within {STEP_TIMEOUT} seconds"
-    if r.returncode != 0:
-        tail = "\n".join(scrub(r.stderr, creds).strip().splitlines()[-6:])
-        hint = classify(tail) or f"{module}.py could not be loaded."
-        return None, f"{hint}\n\n{block(tail)}"
     import json
-    for line in reversed(r.stdout.strip().splitlines()):
-        try:
-            return json.loads(line), ""
-        except json.JSONDecodeError:
-            continue
-    return None, f"{module}.py loaded but its prompts could not be read."
+    path = PROMPTS_DIR / f"challenge_{challenge_id}.json"
+    if not path.is_file():
+        return None, ("No prompt saved for this challenge yet. Write it in the Prompt Lab beside "
+                      "this page and press Run my prompts once; the page saves as you type.")
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None, "The saved prompt could not be read. Press Run my prompts in the Prompt Lab once, then this button again."
+    if not isinstance(data, dict):
+        return None, "The saved prompt could not be read. Press Run my prompts in the Prompt Lab once, then this button again."
+    return {"system": str(data.get("system") or ""), "user": str(data.get("user") or "")}, ""
 
 
 def block(text: str, title: str = "") -> str:

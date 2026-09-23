@@ -3,13 +3,13 @@
 CHECKS, keyed by codetest id, is what run.py dispatches to:
     check-env          (20 pts)  one short question to the memphis-copilot deployment over
                                  the student's own endpoint and key; passes when it answers
-    check-challenge-1  (20 pts)  SYSTEM_PROMPT from challenge1.py, run against the two
-                                 test messages, graded 0-100 against the rubric
-    check-challenge-2  (20 pts)  USER_PROMPT from challenge2.py, run under the fixed
-                                 system prompt, graded 0-100 against the rubric
-    check-challenge-3  (20 pts)  SYSTEM_PROMPT and USER_PROMPT from challenge3.py, run
-                                 against the three customer messages, format-checked,
-                                 then graded 0-100 against the rubric
+    check-challenge-1  (20 pts)  the system prompt saved by the Prompt Lab, run against
+                                 the two test messages, graded 0-100 against the rubric
+    check-challenge-2  (20 pts)  the saved user prompt, run under the fixed system
+                                 prompt, graded 0-100 against the rubric
+    check-challenge-3  (20 pts)  the saved system and user prompts, run against the
+                                 three customer messages, format-checked, then graded
+                                 0-100 against the rubric
 
 The challenge checks report the 0-100 score as the percent, so partial points are
 earned below the pass mark and the best score is kept by Codio. A prompt-writing
@@ -17,7 +17,8 @@ exercise has to be judged, so the grading call asks the student's own deployment
 score the prompts against the rubric; the harness then clamps every score to its
 maximum and computes the total itself. Two things are checked without the model:
 a prompt pasted from the brief scores zero, and challenge 3's replies must parse as
-JSON with the right keys and allowed values.
+JSON with the right keys and allowed values. The prompts come from prompts/challenge_<id>.json,
+which the Prompt Lab test bed (app.py) saves as the student types.
 
 The challenge definitions (scenario, requirements, rubric, test messages) live in
 challenges.json at the workspace root, where the guide pages also draw from.
@@ -37,12 +38,6 @@ REPLY_SHOWN = 700          # characters of each reply shown in the result panel
 CONFIG = json.loads((harness.WORKSPACE / "challenges.json").read_text(encoding="utf-8"))
 PASS_SCORE = int(CONFIG.get("pass_score", 70))
 CHALLENGES = {c["id"]: c for c in CONFIG["challenges"]}
-
-# The lines the student files ship with inside the prompt constants.
-PLACEHOLDERS = (
-    "Write your system prompt here, replacing this line.",
-    "Write your user prompt here, replacing this line.",
-)
 
 GRADER_INSTRUCTIONS = """\
 You are the grader for a prompt-engineering exercise in an AI fundamentals
@@ -291,22 +286,21 @@ def _zero(challenge: dict, headline: str, advice: list[str]) -> int:
 
 def check_challenge(number: int):
     challenge = CHALLENGES[number]
-    module = f"challenge{number}"
 
     def check(creds: dict[str, str]) -> int:
-        prompts, err = harness.read_prompts(module, creds)
+        prompts, err = harness.read_prompts(number)
         if prompts is None:
-            return harness.send(0, "NOT YET\n" + err)
+            return harness.send(0, "NOT YET - 0 of 100. " + err)
         system_prompt = (prompts.get("system") or "").strip() if "system" in challenge["write"] else ""
         user_prompt = (prompts.get("user") or "").strip() if "user" in challenge["write"] else ""
         for name, value, needed in (("SYSTEM_PROMPT", system_prompt, "system" in challenge["write"]),
                                     ("USER_PROMPT", user_prompt, "user" in challenge["write"])):
             if not needed:
                 continue
-            if not value or any(p in value for p in PLACEHOLDERS):
-                return _zero(challenge, f"{name} in {module}.py is still empty.",
-                             [f"Open {module}.py and write your prompt between the two lines of three quote marks, "
-                              "replacing the placeholder line.", "Save, then press this button again."])
+            if not value:
+                return _zero(challenge, f"The {name.lower().replace('_', ' ')} for this challenge is empty.",
+                             ["Write it in the Prompt Lab beside this page; the page saves as you type.",
+                              "Press Run my prompts to see the replies, then press this button again."])
         if copied_from_brief(challenge, system_prompt, user_prompt):
             return _zero(challenge, "Your prompt mostly repeats the challenge's own instructions.",
                          ["Those bullets describe what a good prompt contains; they are not the prompt itself.",

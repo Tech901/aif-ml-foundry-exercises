@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Foundry Prompt Lab</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="app-header">
+        <h1>Foundry Prompt Lab</h1>
+        <p class="subtitle">
+          Write a prompt, press Run, read what the model said. The Check button on the guide page grades it.
+        </p>
+      </header>
+
+      <!-- Shown when .env is not complete yet. -->
+      <div id="config-banner" class="banner hidden"></div>
+
+      <!-- No in-app navigation: each guide page opens its own challenge URL. -->
+      <main class="lab">
+        <!-- Left: the challenge brief. -->
+        <section class="pane brief">
+          <h2 id="challenge-title"></h2>
+          <p id="challenge-goal" class="goal"></p>
+          <p id="challenge-scenario" class="scenario"></p>
+
+          <div id="attachment-box" class="attachment hidden">
+            <h3 id="attachment-label"></h3>
+            <div id="attachment-list"></div>
+          </div>
+
+          <h3>Your prompt must&hellip;</h3>
+          <ul id="requirements"></ul>
+
+          <h3>How the Check button grades it</h3>
+          <ul id="rubric" class="rubric"></ul>
+        </section>
+
+        <!-- Right: editors, then the run log, newest on top. -->
+        <section class="pane work">
+          <div id="editor-system" class="editor">
+            <label for="system-prompt">
+              System prompt
+              <span class="hint">the standing instructions the model always gets</span>
+            </label>
+            <textarea id="system-prompt" rows="7" placeholder="You are..."></textarea>
+          </div>
+
+          <div id="fixed-system" class="fixed hidden">
+            <span class="fixed-tag">Fixed system prompt (provided for you)</span>
+            <pre id="fixed-system-text"></pre>
+          </div>
+
+          <div id="editor-user" class="editor">
+            <label for="user-prompt">
+              User prompt
+              <span class="hint" id="user-hint">the message you send to the model</span>
+            </label>
+            <textarea id="user-prompt" rows="6" placeholder=""></textarea>
+          </div>
+
+          <div id="fixed-tests" class="fixed hidden">
+            <span class="fixed-tag">Test messages your system prompt will face</span>
+            <ol id="fixed-tests-list"></ol>
+          </div>
+
+          <div class="actions">
+            <button id="run-btn" type="button">&#9654; Run my prompts</button>
+            <span id="status" class="status"></span>
+          </div>
+          <p class="saved-note" id="saved-note">Your prompt is saved as you type. When the replies look right, press the Check button on the guide page.</p>
+
+          <div id="log" class="log"></div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      // Which challenge this page shows, set by the Flask route.
+      window.CHALLENGE_ID = {{ challenge_id | tojson }};
+    </script>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+  </body>
+</html>

@@ -1,4 +1,6 @@
-# The course stack ships both of these; this file records them for a box that
-# predates it or for running outside Codio.
+# The course stack ships openai and python-dotenv; lab.sh installs Flask (and anything
+# else missing) for the student on first start. This file records all three for a box
+# that predates the stack or for running outside Codio.
+Flask>=3.0,<4.0
 openai>=1.60
 python-dotenv>=1.0
