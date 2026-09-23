@@ -27,6 +27,8 @@ Choosing a model is half the job; talking to it well is the other half. You writ
 
 The quiz allows one attempt per question, so be sure of each answer in the catalog before you check it. The challenges are the opposite: press Check as often as you like. Each press scores the prompt 0 to 100, that score is the share of the challenge's points you earn, and only your best score is kept.
 
+Your instructor leads the endpoint setup, Part 1 and the start of the Prompt Lab. The three challenges are yours to do on your own, in the time set aside for them.
+
 Use the **Next** arrow at the bottom of this panel to begin: first the endpoint, then Part 1.
 
 *Guide version 2026-09-23.*
