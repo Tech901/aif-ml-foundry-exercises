@@ -29,8 +29,8 @@ The three challenges:
    `gpt-4.1-mini` quota in East US 2 covers the class.
 2. **Stack.** `openai` and `python-dotenv` from the course stack; `lab.sh` installs
    Flask for the student on first start if the stack lacks it.
-3. **`.env`.** Ships blank in git with `AI901_ENDPOINT` and `AI901_KEY`. Never commit
-   it with values.
+3. **`.env`.** Ships blank in git with `AI901_ENDPOINT` and `AI901_KEY`. It is gitignored so a filled-in copy is not staged by
+   accident; in any clone you work in, run `git update-index --skip-worktree .env` once.
 4. **Quiz drift.** The Part 1 questions were written against durable catalog facts,
    but the catalog evolves; give them a quick pass each term.
 5. **Publish** after any grader change, bumping the guide version line on the
